@@ -14,7 +14,7 @@ CREATE TABLE galaxy (
 CREATE TABLE star (
     star_id SERIAL PRIMARY KEY,
     name VARCHAR UNIQUE NOT NULL,
-	galaxy_id INT REFERENCES galaxy(galaxy_id),
+    galaxy_id INT REFERENCES galaxy(galaxy_id),
     mass INT NOT NULL,
     temperature INT,
     has_planets BOOLEAN NOT NULL
@@ -23,7 +23,7 @@ CREATE TABLE star (
 CREATE TABLE planet (
     planet_id SERIAL PRIMARY KEY,
     name VARCHAR UNIQUE NOT NULL,
-	star_id INT REFERENCES star(star_id),
+    star_id INT REFERENCES star(star_id),
     diameter INT NOT NULL,
     distance_from_star NUMERIC,
     has_atmosphere BOOLEAN NOT NULL
@@ -48,7 +48,8 @@ CREATE TABLE constellation (
 );
 
 
-INSERT INTO galaxy VALUES ('Via Lactea', 100000, 'Spiral', true, 13000),
+INSERT INTO galaxy (name, size, shape, has_black_hole, age) VALUES 
+('Via Lactea', 100000, 'Spiral', true, 13000),
 ('Andromeda', 120000, 'Spiral', true, 14000),
 ('Triangulo', 70000, 'Spiral', false, 15000),
 ('Messier 87', 80000, 'Elliptical', true, 12000),
@@ -56,7 +57,8 @@ INSERT INTO galaxy VALUES ('Via Lactea', 100000, 'Spiral', true, 13000),
 ('Rodamoinho', 95000, 'Spiral', false, 17000);
 
 
-INSERT INTO star VALUES ('Sol', 1, 100000, 5778, true),
+INSERT INTO star (name, galaxy_id, mass, temperature, has_planets) VALUES 
+('Sol', 1, 100000, 5778, true),
 ('Sirius', 1, 30000, 9940, false),
 ('Alpha Centauri', 1, 20000, 5790, true),
 ('Betelgeuse', 2, 120000, 3500, true),
@@ -64,7 +66,8 @@ INSERT INTO star VALUES ('Sol', 1, 100000, 5778, true),
 ('Polar', 1, 60000, 4286, true);
 
 
-INSERT INTO planet VALUES ('Terra', 1, 12742, 149600000, true),
+INSERT INTO planet (name, star_id, diameter, distance_from_star, has_atmosphere) VALUES 
+('Terra', 1, 12742, 149600000, true),
 ('Marte', 1, 6779, 227900000, true),
 ('Jupiter', 1, 139820, 778500000, false),
 ('Saturno', 1, 116460, 1433000000, false),
@@ -78,7 +81,8 @@ INSERT INTO planet VALUES ('Terra', 1, 12742, 149600000, true),
 ('Haumea', 1, 1960, 6452000000, false);
 
 
-INSERT INTO moon VALUES ('Lua', 1, 1737, 27.3, false),
+INSERT INTO moon (name, planet_id, radius, orbital_period, is_inhabited) VALUES 
+('Lua', 1, 1737, 27.3, false),
 ('Fobos', 2, 11, 0.3, false),
 ('Ganímedes', 3, 2631, 7.2, false),
 ('Tritão', 5, 1353, 5.9, false),
@@ -99,7 +103,8 @@ INSERT INTO moon VALUES ('Lua', 1, 1737, 27.3, false),
 ('Oberon', 7, 761, 13.5, false);
 
 
-INSERT INTO constellation VALUES ('Orion', 'Ori', 7, 'Rigel', true),
+INSERT INTO constellation (name, abbreviation, number_of_stars, brightest_star, is_zodiac) VALUES 
+('Orion', 'Ori', 7, 'Rigel', true),
 ('Ursa Major', 'UMa', 7, 'Dubhe', false),
 ('Cassiopeia', 'Cas', 5, 'Shedir', true),
 ('Southern Cross', 'Crux', 5, 'Acrux', false),
